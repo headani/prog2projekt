@@ -1,0 +1,205 @@
+.navbar-inverse
+{
+	background-color:black;
+	border:none;
+	border:solid black 1px;
+	font-size:15px;
+	padding:20px;
+	/*position: fixed;*/
+	top: 0;
+	width: 100%;
+	
+	
+}
+.navbar-brand
+{
+	font-size:30px;
+}
+.menu
+{
+	color:white;
+}
+.kekes
+{
+	color:#e6e6e6;
+}
+.kekes:hover
+{
+	color:white;
+}
+.hiba
+{
+	color:red;
+}
+.keret_kep
+{
+	border:solid black 1px;
+	box-shadow: 0px 0px 5px 5px #888888;
+	padding:20px;
+	font-family: 'Playfair Display', serif;
+	font-weight:bold;
+	text-align:center;
+	font-size:15px;
+	margin:10px;
+	height:275px;
+	background-color:white;
+}
+.keret_kep_szervezes
+{
+	border:solid black 1px;
+	box-shadow: 0px 0px 5px 5px #888888;
+	padding:20px;
+	font-family: 'Playfair Display', serif;
+	font-weight:bold;
+	text-align:center;
+	font-size:15px;
+	margin:10px;
+	height:325px;
+	background-color:white;
+}
+.esemeny_hozzaadas
+{
+	border:solid black 1px;
+	box-shadow: 0px 0px 5px 5px #888888;
+	padding:20px;
+	font-family: 'Playfair Display', serif;
+	font-weight:bold;
+	text-align:center;
+	font-size:15px;
+	margin:10px;
+	height:100px;
+	background-color:white;
+}
+.pluszjel
+{
+	height:100px;
+	
+	
+}
+h1
+{
+	font-family: 'Archivo', sans-serif;
+	
+	
+}
+.keret_kep:hover
+{
+	border:solid black 1px;
+	background-color:#e6e6e6;
+}
+.keret_kep_szervezes:hover
+{
+	border:solid black 1px;
+	background-color:#e6e6e6;
+}
+.modalis
+{
+	color:black;
+	font-family: 'Playfair Display', serif;
+	font-size:20px;
+}
+.jegyek
+{
+	color:black;
+	font-family: 'Playfair Display', serif;
+	font-size:15px;
+	border-radius: 15px;
+	
+	box-shadow: 0px 0px 1px 1px #888888;
+	padding:15px;
+}
+.jegyek:hover
+{
+	background-color:#e6e6e6;
+}
+.elfogyott
+{
+	color:red;
+}
+.listazasfejlec
+{
+	color:blue;
+	font-size:15px;
+	font-style:italic;
+	
+}
+.esemeny_adatok
+{
+	text-align:left;
+	
+}
+.keresomezo
+{
+	
+	width:80%;
+	height:30px;	
+}
+.keresomezo:hover
+{
+	border: 0.5px solid black;
+}
+
+#keresesgomb {
+  background-color: black;
+  height:30px;
+  width:100px;
+  color: white;
+  border: 2px solid #555555;
+}
+#keresesgomb:hover {
+  background-color:#e6e6e6;
+  color: black;
+}
+.keresesgomb {
+  background-color: black;
+  height:30px;
+  width:100px;
+  color: white;
+  border: 2px solid #555555;
+}
+.keresesgomb:hover {
+  background-color:#e6e6e6;
+  color: black;
+}
+.szervezojog {
+  background-color: black;
+  height:30px;
+  width:100px;
+  color: white;
+  border: 2px solid #555555;
+}
+.szervezojog:hover {
+  background-color:#e6e6e6;
+  color: black;
+}
+.szervezojogelvetel {
+  background-color: black;
+  height:30px;
+  width:100px;
+  color: white;
+  border: 2px solid #555555;
+}
+.szervezojogelvetel:hover {
+  background-color:#e6e6e6;
+  color: black;
+}
+.jegyar
+{
+	text-align:right;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: black;
+  color: white;
+}

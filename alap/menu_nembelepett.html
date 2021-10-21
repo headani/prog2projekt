@@ -1,0 +1,67 @@
+ <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href=""><span class="kekes" ><img src="kepek/logo4.png"></span></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+		<li><a href="fesztival"><span class="kekes" >Fesztivál</span></a></li>
+		<li><a href="koncert"><span class="kekes" >Koncert</span></a></li>
+		<li><a href="party"><span class="kekes" >Party</span></a></li>
+		<li><a href="eloadas"><span class="kekes" >Előadás</span></a></li>
+		<li><a href="gasztro"><span class="kekes" >Gasztro</span></a></li>
+        
+         <!--  <li><a href="kereses"><span class="kekes" >Keresés</span></a></li>
+        <li><a href="felvitel"><span class="kekes"> Felvitel</span></a></li> -->
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" data-toggle="modal" data-target="#register-modal"><span class="glyphicon glyphicon-user" id="signup"></span> Regisztáció</a></li>
+        <li><a href="#" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Bejelentkezés</a></li>
+      </ul>
+    </div>
+  </div>
+</nav> 
+
+
+
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	  <div class="modal-dialog">
+				<div class="loginmodal-container">
+					<h1>Bejelentkezés a fiókodba</h1><br>
+				  
+					<input type="text" name="user" placeholder="Felhasználónév">
+					<input type="password" name="pass" placeholder="Jelszó">
+					<input type="submit" name="login" class="login loginmodal-submit" value="Bejelentkezés">
+					
+					<span id="loginhiba" class="hiba">&nbsp;</span>
+					
+				  <div class="login-help">
+					<a href="#">Regisztáció</a> - <a href="#">Elfelejtett jelszó</a>
+				  </div>
+				</div>
+			</div>
+		  </div>
+
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	  <div class="modal-dialog">
+				<div class="loginmodal-container">
+					<h1>Regisztáció</h1><br>
+				  
+					<input type="text" id="reg_felhasznalonev" placeholder="Felhasználónév">
+					<input type="password"  id="reg_jelszo" placeholder="Jelszó">
+					<input type="password" id="reg_jelszo_megegyszer" placeholder="Jelszó újra">
+					<input type="submit" id="registergomb" class="login loginmodal-submit" value="Regisztáció">
+					
+					<span id="reg_sikertelen" class="hiba">&nbsp;</span>
+					
+				  
+				</div>
+			</div>
+		  </div>		  
