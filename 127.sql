@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 5.0.1
+-- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2020. Feb 25. 13:54
--- Kiszolgáló verziója: 10.1.19-MariaDB
--- PHP verzió: 5.6.28
+-- Létrehozás ideje: 2021. Nov 03. 17:22
+-- Kiszolgáló verziója: 10.4.11-MariaDB
+-- PHP verzió: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `jegyportal`
 --
-CREATE DATABASE IF NOT EXISTS `jegyportal` DEFAULT CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
-USE `jegyportal`;
 
 -- --------------------------------------------------------
 
@@ -40,14 +40,25 @@ CREATE TABLE `eladott` (
 --
 
 INSERT INTO `eladott` (`eladott_id`, `eladott_vasarlo_id`, `eladott_jegyek_id`, `eladott_jegyek_db`) VALUES
-(46, 58, 43, 5),
-(47, 59, 36, 3),
-(48, 60, 17, 2),
-(49, 61, 49, 1),
-(50, 62, 36, 4),
-(51, 63, 49, 4),
-(52, 64, 49, 4),
-(53, 65, 17, 4);
+(46, 58, 43, 2),
+(47, 59, 36, 0),
+(48, 60, 17, 0),
+(49, 61, 49, 0),
+(50, 62, 36, 0),
+(51, 63, 49, 0),
+(52, 64, 49, 0),
+(53, 65, 17, 0),
+(54, 66, 43, 0),
+(55, 67, 49, 0),
+(56, 68, 49, 0),
+(57, 69, 36, 0),
+(58, 70, 49, 2),
+(59, 71, 49, 5),
+(60, 72, 43, 6),
+(61, 73, 36, 8),
+(62, 74, 49, 2),
+(63, 75, 43, 3),
+(64, 76, 52, 3);
 
 -- --------------------------------------------------------
 
@@ -158,16 +169,17 @@ CREATE TABLE `jegyek` (
 INSERT INTO `jegyek` (`jegyek_id`, `esemeny_id`, `jegyek_tipus`, `jegyek_darab`, `jegyek_ar`) VALUES
 (17, 49, 'Bérlet', 29994, 15000),
 (35, 53, 'Helyszíni', 300, 2000),
-(36, 51, 'Super Early Bird', 13, 2500),
+(36, 51, 'Super Early Bird', 7, 2500),
 (37, 51, 'Early Bird ', 20, 3000),
 (38, 51, 'Elővételes 1', 50, 3500),
 (39, 51, 'Elővételes 2', 100, 4000),
 (40, 51, 'Elővételes 3', 100, 4500),
-(43, 52, 'Early Bird Ülőjegy', 295, 4990),
+(43, 52, 'Early Bird Ülőjegy', 288, 4990),
 (44, 52, 'Elővételes Ülőjegy', 300, 5990),
-(49, 60, 'Normál', 21, 11900),
+(49, 60, 'Normál', 12, 11900),
 (50, 62, 'DE DIÁK', 250, 1000),
-(51, 62, 'KÜLSŐS', 250, 1500);
+(51, 62, 'KÜLSŐS', 250, 1500),
+(52, 56, 'Patriknak', 0, 10);
 
 -- --------------------------------------------------------
 
@@ -216,7 +228,18 @@ INSERT INTO `vasarlo` (`vasarlo_id`, `vasarlo_nev`, `vasarlo_lakcim`) VALUES
 (62, 'Czigle Attila', 'Debrecen Borsika 78'),
 (63, 'Czigle Attila', 'Debrecen Borsika 78'),
 (64, 'Hajzer Péter', 'Debrecen Füredi 65'),
-(65, 'Kovács József Márk', 'Hajdúböszörmény Budai-Nagy Antal 10');
+(65, 'Kovács József Márk', 'Hajdúböszörmény Budai-Nagy Antal 10'),
+(66, 'lol', 'lol'),
+(67, 'lol', 'lol'),
+(68, 'lol', 'lol'),
+(69, 'Patrik', 'Mickolc acelvaros'),
+(70, 'lol', '34343'),
+(71, 'Patrik', '12312'),
+(72, 'dani ', 'vok'),
+(73, 'Patrik', 'dnai'),
+(74, 'Patrik', '34343'),
+(75, 'Patrik', 'lol'),
+(76, 'Patrik', 'Mickolc acelvaros');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -278,37 +301,44 @@ ALTER TABLE `vasarlo`
 -- AUTO_INCREMENT a táblához `eladott`
 --
 ALTER TABLE `eladott`
-  MODIFY `eladott_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `eladott_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+
 --
 -- AUTO_INCREMENT a táblához `esemeny`
 --
 ALTER TABLE `esemeny`
   MODIFY `esemeny_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
 --
 -- AUTO_INCREMENT a táblához `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
   MODIFY `felhasznalo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT a táblához `helyszin`
 --
 ALTER TABLE `helyszin`
   MODIFY `helyszin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT a táblához `jegyek`
 --
 ALTER TABLE `jegyek`
-  MODIFY `jegyek_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `jegyek_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
 --
 -- AUTO_INCREMENT a táblához `tipus`
 --
 ALTER TABLE `tipus`
   MODIFY `tipus_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT a táblához `vasarlo`
 --
 ALTER TABLE `vasarlo`
-  MODIFY `vasarlo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `vasarlo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+
 --
 -- Megkötések a kiírt táblákhoz
 --
@@ -333,6 +363,7 @@ ALTER TABLE `esemeny`
 --
 ALTER TABLE `jegyek`
   ADD CONSTRAINT `jegyek_ibfk_2` FOREIGN KEY (`esemeny_id`) REFERENCES `esemeny` (`esemeny_id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
