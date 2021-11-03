@@ -210,6 +210,28 @@ $.post("pages/kereses/lekerdez.php", function(data, status){
 			$("#fizetesgomb").click(function(){
 				
 				
+				//qr kod teszt
+				
+				const qr_id = "423423342";
+
+
+				function download(url, filename) {
+				  fetch(url)
+					.then(response => response.blob())
+					.then(blob => {
+					  const link = document.createElement("a");
+					  link.href = URL.createObjectURL(blob);
+					  link.download = filename;
+					  link.click();
+				  })
+				  .catch(console.error);
+				}
+
+				download("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qr_id,"qr" + qr_id + ".png")
+				
+				
+				
+				
 				//alert("Sikeres vásárlás");
 				//alert(adatok.bevitel3);
 				var adatok=
@@ -251,7 +273,7 @@ $.post("pages/kereses/lekerdez.php", function(data, status){
 			
 			});
 			
-			
+			//fizetesgomb vege
 			});
 			
 			

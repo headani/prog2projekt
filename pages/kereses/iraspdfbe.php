@@ -41,20 +41,6 @@ $pdf->AddPage();
 $pdf->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
 $pdf->SetFont('DejaVu','',10);
 
-/*
-$pdf->cell(40, 10, "Név", 1, 0, 'C');
-$pdf->cell(50, 10, "Ételek", 1, 0, 'C');
-$pdf->cell(20, 10, "Adag", 1, 0, 'C');
-$pdf->cell(50, 10, "Telefonszám", 1, 0, 'C');
-$pdf->cell(30, 10, "Végösszeg", 1, 0, 'C');
-*/
-
-
-/*
-foreach ($kimenet as $key => $value) {
-	$pdf->Write(6,$value);
-}
-*/
 
 
 $pdf->Cell(130 ,5,'Debrecen Tickets',0,1);
@@ -67,7 +53,7 @@ $pdf->Cell(59 ,5,'',0,1);//end of line
 
 $pdf->Cell(130 ,5,'[Debrecen, Magyarország, 4030]',0,1);
 
-
+////valahova ide kellene beirni a qr kodot majd
 $pdf->Cell(130 ,5,'Telefon [+12345678]',0,0);
 $pdf->Cell(30 ,5,'Számlaszám: ',0,0);
 $pdf->Cell(34 ,5,$row2['eladott_id'],0,1);//end of line

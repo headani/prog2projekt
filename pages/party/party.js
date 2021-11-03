@@ -228,9 +228,9 @@ $.post("pages/party/lekerdez.php", function(data, status){
 				$("#szamlagomb").click(function(){
 				//pdf letrehozasa
 				var adatok=
-			{
-				bevitel1:"atkuldott"
-			}
+				{
+					bevitel1:"atkuldott"
+				}
 			$.post("pages/kereses/iraspdfbe.php", adatok,function(eredmeny){
 				//alert(eredmeny);
 				window.open("pages/kereses/Rendelesek.pdf", '_blank');
