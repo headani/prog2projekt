@@ -5,17 +5,13 @@
 // define("_SYSTEM_TTFONTS", "C:/Windows/Fonts/");
 
 require('tfpdf.php');
+require("phpqrcode/qrlib.php");
 include "../../alap/kapcsolat.php"; 
 $bevitel1=$_POST['bevitel1']; // rendeles id
 
 
 
-
-
-
-  
-
-// a paraméter 2
+// jegyek  paraméter 
 $sql = "SELECT * FROM eladott 
 INNER JOIN vasarlo ON eladott.eladott_vasarlo_id=vasarlo.vasarlo_id
 ORDER BY vasarlo_id desc";
@@ -24,10 +20,20 @@ $result = mysqli_query($conn, $sql);
 
 if(mysqli_num_rows($result) > 0)
 	
-	$row2 = mysqli_fetch_assoc($result);
+	$sor2 = mysqli_fetch_assoc($result);
 
 
 	
+
+
+//qr kod lekerdezes
+$sql = "SELECT * FROM qr ORDER BY qr_id desc";
+		
+$result = mysqli_query($conn, $sql);
+
+if(mysqli_num_rows($result) > 0)
+	
+	$qr = mysqli_fetch_assoc($result);
 
 
 
@@ -35,7 +41,11 @@ if(mysqli_num_rows($result) > 0)
 $pdf = new tFPDF('p', 'mm', 'A4');
 
 
+
+//annyi oldal ahány jegy
+
 $pdf->AddPage();
+
 
 // Add a Unicode font (uses UTF-8)
 $pdf->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
@@ -56,28 +66,48 @@ $pdf->Cell(130 ,5,'[Debrecen, Magyarország, 4030]',0,1);
 ////valahova ide kellene beirni a qr kodot majd
 $pdf->Cell(130 ,5,'Telefon [+12345678]',0,0);
 $pdf->Cell(30 ,5,'Számlaszám: ',0,0);
-$pdf->Cell(34 ,5,$row2['eladott_id'],0,1);//end of line
+$pdf->Cell(34 ,5,$sor2['eladott_id'],0,1);//end of line
 
 $pdf->Cell(130 ,5,'Fax [+12345678]',0,0);
-//$pdf->Cell(25 ,5,'ID',0,0);
-//$pdf->Cell(34 ,5,'[1234567]',0,1);//end of line
+$pdf->Cell(30 ,5,'Qr kód:',0,0);
+$pdf->Cell(34 ,5,$qr['qr_code'],0,1);//end of line
 
-//make a dummy empty cell as a vertical spacer
+
+//
+$pdf->Cell(130 ,5,'',0,0);
+$pdf->Cell(30 ,5,'Qr kód:',0,0);
+$pdf->Cell(34 ,5,$qrkep,0,1);//end of line
+
+//this is the first method
+$pdf->Image("http://localhost/tanulo/pappdaniel_2021_11_03/pages/kereses/qr_generator.php?code=".$qr['qr_code'], 10, 10, 20, 20, "png");
+
+
+
+//this is the second method
+//$pdf->Image("test.png", 40, 10, 20, 20, "png");
+
+
+//rendeles szam
+$pdf->Cell(130 ,5,'',0,0);
+$pdf->Cell(30 ,5,'Számlaszám: ',0,0);
+$pdf->Cell(34 ,5,$sor2['eladott_id'],0,1);//end of line
+
+// nagy üres cella , térköznek
 $pdf->Cell(189 ,10,'',0,1);//end of line
 
-//billing address
+//számlázási cím
 $pdf->Cell(100 ,5,'Vásárló',0,1);//end of line
 
-//add dummy cell at beginning of each line for indentation
+//behuzas erdekeben egy ures sor minden sor elejere
 $pdf->Cell(10 ,5,'',0,0);
-$pdf->Cell(90 ,5,$row2['vasarlo_nev'],0,1);
+$pdf->Cell(90 ,5,$sor2['vasarlo_nev'],0,1);
 
 $pdf->Cell(10 ,5,'',0,0);
-$pdf->Cell(90 ,5,$row2['vasarlo_lakcim'],0,1);
+$pdf->Cell(90 ,5,$sor2['vasarlo_lakcim'],0,1);
 
 
 
-//make a dummy empty cell as a vertical spacer
+//üres cella térköznek
 $pdf->Cell(189 ,10,'',0,1);//end of line
 
 
@@ -98,7 +128,7 @@ $result = mysqli_query($conn, $sql);
 
 
 
-//invoice contents
+//jegyadatok
 //$pdf->SetFont('Arial','B',12);
 
 $pdf->Cell(110 ,5,'Esemény',1,0);
@@ -111,8 +141,6 @@ $pdf->Cell(20 ,5,'Összesen ',1,1);//end of line
 //$pdf->SetFont('Arial','',12);
 
 //Numbers are right-aligned so we give 'R' after new line parameter
-
-
 	
 	while($row = mysqli_fetch_assoc($result)) {
 
@@ -137,7 +165,7 @@ $pdf->Cell(34 ,5,'1,000',1,1,'R');//end of line
 $pdf->Cell(130 ,5,'',0,0);
 $pdf->Cell(25 ,5,'Összesen',0,0);
 $pdf->Cell(4 ,5,'Ft',0,0);
-$pdf->Cell(30 ,5,$row2['ar'],0,1,'R');//end of line
+$pdf->Cell(30 ,5,$sor2['ar'],0,1,'R');//end of line
 */
 	
 	

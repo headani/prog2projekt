@@ -120,6 +120,13 @@ $.post("pages/kereses/lekerdez.php", function(data, status){
 			var melyik = res[1] ;
 			//alert(res[1]);
 			//alert($("#jegyek_"+melyik).val());
+			//var qr_id = 101;
+			//alert(qr_id);
+			
+			
+		
+			
+			
 			
 			
 			
@@ -127,7 +134,6 @@ $.post("pages/kereses/lekerdez.php", function(data, status){
 			{
 			bevitel1:melyik,
 			bevitel2:$("#jegyek_"+melyik).val()
-			
 			}
 			
 			$.post("pages/kereses/jegyek_adat.php",adatok, function(data, status){
@@ -210,27 +216,7 @@ $.post("pages/kereses/lekerdez.php", function(data, status){
 			$("#fizetesgomb").click(function(){
 				
 				
-				//qr kod teszt
-				
-				const qr_id = "423423342";
-
-
-				function download(url, filename) {
-				  fetch(url)
-					.then(response => response.blob())
-					.then(blob => {
-					  const link = document.createElement("a");
-					  link.href = URL.createObjectURL(blob);
-					  link.download = filename;
-					  link.click();
-				  })
-				  .catch(console.error);
-				}
-
-				download("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qr_id,"qr" + qr_id + ".png")
-				
-				
-				
+			
 				
 				//alert("Sikeres vásárlás");
 				//alert(adatok.bevitel3);
@@ -250,9 +236,9 @@ $.post("pages/kereses/lekerdez.php", function(data, status){
 				$("#szamlagomb").click(function(){
 				//pdf letrehozasa
 				var adatok=
-			{
-				bevitel1:"atkuldott"
-			}
+				{
+					bevitel1:"atkuldott"
+				}
 			$.post("pages/kereses/iraspdfbe.php", adatok,function(eredmeny){
 				//alert(eredmeny);
 				window.open("pages/kereses/Rendelesek.pdf", '_blank');
@@ -326,7 +312,8 @@ $("#keresesgomb").click(function(){
 	{
 		bevitel1:$("#bevitel1").val(),
 		bevitel2:$("#bevitel2").val(),
-		bevitel3:$("#bevitel3").val()
+		bevitel3:$("#bevitel3").val(),
+		bevitelqr:$("#bevitelqr").val()
 		
 	}
   $.post("pages/kereses/lekerdez_kereses.php",adatok, function(data, status){
@@ -427,12 +414,14 @@ $("#keresesgomb").click(function(){
 			//alert(res[1]);
 			//alert($("#jegyek_"+melyik).val());
 			
-			
+			//qr ertekadas kesobb random generalas
+			//var qr = 12312123;
 			
 			var adatok=
 			{
 			bevitel1:melyik,
-			bevitel2:$("#jegyek_"+melyik).val()
+			bevitel2:$("#jegyek_"+melyik).val(),
+			//bevitelqr=qr
 			
 			}
 			
