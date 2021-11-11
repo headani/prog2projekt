@@ -9,21 +9,35 @@ $result = mysqli_query($conn, $sql);
 
    $row = mysqli_fetch_assoc($result);
 		
-	$eladott_jegyek_db=$row["eladott_jegyek_db"];	
+	$eladott_jegyek_db=$row["eladott_jegyek_db"];
+	$eladott_id=$row["eladott_id"];	
 
 
 
 //qr kod lekerdezes
 
-$sql = "SELECT * FROM qr ORDER BY qr_id desc";
-		
+$sql = "SELECT * FROM qr  
+INNER JOIN eladott
+ON qr.qr_eladott_id=eladott.eladott_id
+WHERE qr.qr_eladott_id=$eladott_id";
+
+
+	
+//mukodo
 $result = mysqli_query($conn, $sql);
 
 if(mysqli_num_rows($result) > 0)
 	
 	$qr = mysqli_fetch_assoc($result);
 	
+/*
+//osszes sor tarolas
+	$qr = array(); 
 
+while ( $row = mysql_fetch_array($qr, MYSQL_ASSOC) ){
+    $qr[] = $row
+}
+ */
 
 
 
@@ -39,6 +53,7 @@ $pdf = new tFPDF('p', 'mm', 'A4');
 //jegyek eltoltasa
 $magassag = 10;
 
+
 if($eladott_jegyek_db >= 1)
 {
 	for ($i = 0; $i < $eladott_jegyek_db; $i++)
@@ -50,7 +65,6 @@ if($eladott_jegyek_db >= 1)
 	}
 	
 }
-
 
 
 

@@ -33,6 +33,7 @@
 		   //echo '<li><a href="jegyfelvitel"><span class="kekes">Jegyek felvitele</span></a></li>';
 		   //echo '<li><a href="jegytorles"><span class="kekes">Jegyek törlése</span></a></li>';
 		   echo '<li><a href="szervezes"><span class="kekes">Szervezés</span></a></li>';
+		   echo '<li><a href="jegyellenorzes"><span class="kekes">Jegyellenőrzés</span></a></li>';
 		}
 		if ($_SESSION["loginrang"]==2)	
 		{
@@ -43,6 +44,7 @@
 		   //echo '<li><a href="jegytorles"><span class="kekes">Jegyek törlése</span></a></li>';
 		   echo '<li><a href="szervezes"><span class="kekes">Szervezés</span></a></li>';
 		   echo '<li><a href="felhasznalokezeles"><span class="kekes">Felhasználó kezelés</span></a></li>';
+		   echo '<li><a href="jegyellenorzes"><span class="kekes">Jegyellenőrzés</span></a></li>';
 		}
 	   ?>
 
