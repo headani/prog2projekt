@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+
   <h1>Jegy ellenőrzés</h1>
   <div id="loadingMessage">Engedélyezze a kamera hozzáférést!</div>
   <canvas id="canvas" hidden></canvas>
@@ -15,12 +17,10 @@
     <div id="outputMessage">Nem található QR kód.</div>
     <div hidden><b>Kód:</b> <span id="outputData"></span></div>
   </div>
-  <div class="modal-body" id="admin_torzs">
-        <p>Some text in the modal.</p>
-      </div>
   
+  <div id="talalat"></div>
   
-  <script src="qrread.js"></script>
-    
+ <script src="qrread.js"></script>
+  <script src="jegyellenorzes.js"></script>
 </body>
 </html>

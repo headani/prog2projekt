@@ -9,7 +9,7 @@ $kimenet=array();
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-        //echo "id: " . $row["film_id"]. " - Name: " . $row["film_cim"]. " " . $row["film_ev"]. "<br>";
+		//echo $row["qr_code"];
 		array_push($kimenet,$row);
 	}
 	echo json_encode($kimenet);

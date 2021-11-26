@@ -3,6 +3,7 @@ require('tfpdf.php');
 include "../../alap/kapcsolat.php"; 
 
 
+
 //eladott jegyek db lekérdezése
 $sql = "SELECT * FROM eladott  ORDER BY eladott_id DESC ";
 $result = mysqli_query($conn, $sql);
@@ -11,6 +12,18 @@ $result = mysqli_query($conn, $sql);
 		
 	$eladott_jegyek_db=$row["eladott_jegyek_db"];
 	$eladott_id=$row["eladott_id"];	
+	$eladott_jegyek_id=$row["eladott_jegyek_id"];
+
+
+//eladott jegyhez tartozo esemeny lekerdezese
+$sql = "SELECT `esemeny_kep` FROM `esemeny` 
+INNER JOIN jegyek ON esemeny.esemeny_id = jegyek.esemeny_id
+INNER JOIN eladott ON jegyek.jegyek_id=$eladott_jegyek_id";
+$result = mysqli_query($conn, $sql);
+
+   $row = mysqli_fetch_assoc($result);
+		
+	$esemeny_kep=$row["esemeny_kep"];
 
 
 
@@ -23,48 +36,31 @@ WHERE qr.qr_eladott_id=$eladott_id";
 
 
 	
-//mukodo
 $result = mysqli_query($conn, $sql);
 
-if(mysqli_num_rows($result) > 0)
-	
-	$qr = mysqli_fetch_assoc($result);
-	
-/*
-//osszes sor tarolas
-	$qr = array(); 
 
-while ( $row = mysql_fetch_array($qr, MYSQL_ASSOC) ){
-    $qr[] = $row
+$results_arr = []; 
+while ($row = $result->fetch_assoc()) { 
+  $results_arr[] = $row['qr_code']; 
 }
- */
 
-
+	
 
 
 $pdf = new tFPDF('p', 'mm', 'A4');
 
 //annyi oldal beszúrása ahány eladott jegy van
-//for ($i = 0; $i < $eladott_jegyek_db; $i++)
+for ($i = 0; $i < $eladott_jegyek_db; $i++)
+{
+	//annyi oldal beszúrása ahány eladott jegy van
 	$pdf->AddPage();
 
-
-
-//jegyek eltoltasa
-$magassag = 10;
-
-
-if($eladott_jegyek_db >= 1)
-{
-	for ($i = 0; $i < $eladott_jegyek_db; $i++)
-	{
+	$pdf->Image("http://localhost/tanulo/pappdaniel_2021_11_11/pages/kereses/qr_generator.php?code=".($results_arr[$i]), 10, 10, 30, 30, "png");
+	$pdf->Image("http://localhost/tanulo/pappdaniel_2021_11_11/kepek/".($esemeny_kep), 100, 10, 100, "jpg");
 		
-		$pdf->Image("http://localhost/tanulo/pappdaniel_2021_11_03/pages/kereses/qr_generator.php?code=".($qr['qr_code']), 10, $magassag, 30, 30, "png");
-		
-		$magassag=$magassag+40;
-	}
-	
+
 }
+
 
 
 

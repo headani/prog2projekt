@@ -45,6 +45,7 @@
 		   echo '<li><a href="szervezes"><span class="kekes">Szervezés</span></a></li>';
 		   echo '<li><a href="felhasznalokezeles"><span class="kekes">Felhasználó kezelés</span></a></li>';
 		   echo '<li><a href="jegyellenorzes"><span class="kekes">Jegyellenőrzés</span></a></li>';
+		   echo '<li><a href="jegyellenorzes2"><span class="kekes">Jegyellenőrzés2</span></a></li>';
 		}
 	   ?>
 
