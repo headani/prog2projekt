@@ -1,9 +1,5 @@
 <?php
 
-// Optionally define the filesystem path to your system fonts
-// otherwise tFPDF will use [path to tFPDF]/font/unifont/ directory
-// define("_SYSTEM_TTFONTS", "C:/Windows/Fonts/");
-
 require('tfpdf.php');
 require("phpqrcode/qrlib.php");
 include "../../alap/kapcsolat.php"; 
@@ -21,20 +17,6 @@ $result = mysqli_query($conn, $sql);
 if(mysqli_num_rows($result) > 0)
 	
 	$sor2 = mysqli_fetch_assoc($result);
-
-
-	
-
-
-//qr kod lekerdezes
-$sql = "SELECT * FROM qr ORDER BY qr_id desc";
-		
-$result = mysqli_query($conn, $sql);
-
-if(mysqli_num_rows($result) > 0)
-	
-	$qr = mysqli_fetch_assoc($result);
-
 
 
 
@@ -68,29 +50,9 @@ $pdf->Cell(130 ,5,'Telefon [+12345678]',0,0);
 $pdf->Cell(30 ,5,'Számlaszám: ',0,0);
 $pdf->Cell(34 ,5,$sor2['eladott_id'],0,1);//end of line
 
-$pdf->Cell(130 ,5,'Fax [+12345678]',0,0);
-$pdf->Cell(30 ,5,'Qr kód:',0,0);
-$pdf->Cell(34 ,5,$qr['qr_code'],0,1);//end of line
+$pdf->Cell(130 ,5,'Fax [+12345678]',0,0);//end of line
 
 
-//
-$pdf->Cell(130 ,5,'',0,0);
-$pdf->Cell(30 ,5,'Qr kód:',0,0);
-$pdf->Cell(34 ,5,$qrkep,0,1);//end of line
-
-//this is the first method
-$pdf->Image("http://localhost/tanulo/pappdaniel_2021_11_03/pages/kereses/qr_generator.php?code=".$qr['qr_code'], 10, 10, 20, 20, "png");
-
-
-
-//this is the second method
-//$pdf->Image("test.png", 40, 10, 20, 20, "png");
-
-
-//rendeles szam
-$pdf->Cell(130 ,5,'',0,0);
-$pdf->Cell(30 ,5,'Számlaszám: ',0,0);
-$pdf->Cell(34 ,5,$sor2['eladott_id'],0,1);//end of line
 
 // nagy üres cella , térköznek
 $pdf->Cell(189 ,10,'',0,1);//end of line
@@ -104,7 +66,6 @@ $pdf->Cell(90 ,5,$sor2['vasarlo_nev'],0,1);
 
 $pdf->Cell(10 ,5,'',0,0);
 $pdf->Cell(90 ,5,$sor2['vasarlo_lakcim'],0,1);
-
 
 
 //üres cella térköznek
@@ -151,60 +112,73 @@ $pdf->Cell(20 ,5,$row['jegyek_ar'],1,0);
 $pdf->Cell(20 ,5,$row['ar'],1,1,'R');//end of line
 	}
 	
-/*	
-$pdf->Cell(130 ,5,'Supaclean Diswasher',1,0);
-$pdf->Cell(25 ,5,'-',1,0);
-$pdf->Cell(34 ,5,'1,200',1,1,'R');//end of line
 
-$pdf->Cell(130 ,5,'Something Else',1,0);
-$pdf->Cell(25 ,5,'-',1,0);
-$pdf->Cell(34 ,5,'1,000',1,1,'R');//end of line
-*/
-//summary
-/*
-$pdf->Cell(130 ,5,'',0,0);
-$pdf->Cell(25 ,5,'Összesen',0,0);
-$pdf->Cell(4 ,5,'Ft',0,0);
-$pdf->Cell(30 ,5,$sor2['ar'],0,1,'R');//end of line
-*/
-	
-	
-	
-/*
-$pdf->Cell(130 ,5,'',0,0);
-$pdf->Cell(25 ,5,'Taxable',0,0);
-$pdf->Cell(4 ,5,'$',1,0);
-$pdf->Cell(30 ,5,'0',1,1,'R');//end of line
 
-$pdf->Cell(130 ,5,'',0,0);
-$pdf->Cell(25 ,5,'Tax Rate',0,0);
-$pdf->Cell(4 ,5,'$',1,0);
-$pdf->Cell(30 ,5,'10%',1,1,'R');//end of line
 
-$pdf->Cell(130 ,5,'',0,0);
-$pdf->Cell(25 ,5,'Total Due',0,0);
-$pdf->Cell(4 ,5,'$',1,0);
-$pdf->Cell(30 ,5,'4,450',1,1,'R');//end of line
 
-*/
+//pdf_qr beagyazas proba
 
-// Load a UTF-8 string from a file and print it
-$txt = '';
+//eladott jegyek db lekérdezése
+$sql = "SELECT * FROM eladott  ORDER BY eladott_id DESC ";
+$result = mysqli_query($conn, $sql);
 
+   $row = mysqli_fetch_assoc($result);
+		
+	$eladott_jegyek_db=$row["eladott_jegyek_db"];
+	$eladott_id=$row["eladott_id"];	
+	$eladott_jegyek_id=$row["eladott_jegyek_id"];
+
+
+//eladott jegyhez tartozo esemeny lekerdezese
+$sql = "SELECT `esemeny_kep` FROM `esemeny` 
+INNER JOIN jegyek ON esemeny.esemeny_id = jegyek.esemeny_id
+INNER JOIN eladott ON jegyek.jegyek_id=$eladott_jegyek_id";
+$result = mysqli_query($conn, $sql);
+
+   $row = mysqli_fetch_assoc($result);
+		
+	$esemeny_kep=$row["esemeny_kep"];
+
+
+
+//qr kod lekerdezes
+
+$sql = "SELECT * FROM qr  
+INNER JOIN eladott
+ON qr.qr_eladott_id=eladott.eladott_id
+WHERE qr.qr_eladott_id=$eladott_id";
 
 
 	
-						
-
-$pdf->Write(8,$txt);
-
-$pdf->Ln(10);
-//$pdf->Write(5,'blablabla....');
-//$pdf->Write(6,$kimenet);
+$result = mysqli_query($conn, $sql);
 
 
-//$pdf->Ln(10);
-//$pdf->Write(5);
+$results_arr = []; 
+while ($row = $result->fetch_assoc()) { 
+  $results_arr[] = $row['qr_code']; 
+}
+
+	
+
+
+
+//annyi oldal beszúrása ahány eladott jegy van
+for ($i = 0; $i < $eladott_jegyek_db; $i++)
+{
+	//annyi oldal beszúrása ahány eladott jegy van
+	$pdf->AddPage();
+
+	$pdf->Image("http://localhost/tanulo/pappdaniel_2021_11_11/pages/kereses/qr_generator.php?code=".($results_arr[$i]), 10, 10, 30, 30, "png");
+	$pdf->Image("http://localhost/tanulo/pappdaniel_2021_11_11/kepek/".($esemeny_kep), 100, 10, 100, "jpg");
+		
+
+}
+//proba vege
+
+
+
+
+
 
 $path = "Rendelesek.pdf";
 $pdf->Output($path,'F');
