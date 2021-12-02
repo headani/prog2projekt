@@ -50,12 +50,29 @@
           outputData.parentElement.hidden = false;
           outputData.innerText = code.data;
 		  ellenorizendo=code.data;
+		  
+		
+		$.post("pages/jegyellenorzes/lekerdez.php",ellenorizendo, function(data, status){
+			
+					
+				});	
+		
+	
+
+		  
+		  
         } else {
           outputMessage.hidden = false;
           outputData.parentElement.hidden = true;
         }
       }
       requestAnimationFrame(tick);
-    }
+    
+	
+	
+	
+	
+	
+	}
 	
 	
