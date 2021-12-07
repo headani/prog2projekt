@@ -168,8 +168,8 @@ for ($i = 0; $i < $eladott_jegyek_db; $i++)
 	//annyi oldal beszúrása ahány eladott jegy van
 	$pdf->AddPage();
 
-	$pdf->Image("http://localhost/tanulo/pappdaniel_2021_11_11/pages/kereses/qr_generator.php?code=".($results_arr[$i]), 10, 10, 30, 30, "png");
-	$pdf->Image("http://localhost/tanulo/pappdaniel_2021_11_11/kepek/".($esemeny_kep), 100, 10, 100, "jpg");
+	$pdf->Image("http://localhost/tanulo/pappdaniel_2021/pages/kereses/qr_generator.php?code=".($results_arr[$i]), 10, 10, 30, 30, "png");
+	$pdf->Image("http://localhost/tanulo/pappdaniel_2021/kepek/".($esemeny_kep), 100, 10, 100, "jpg");
 		
 
 }
